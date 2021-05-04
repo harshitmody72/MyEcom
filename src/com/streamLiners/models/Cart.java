@@ -43,12 +43,12 @@ public class Cart {
         else{
             CartItem item = new CartItem(product.name, variant.price, 1);
             cartItems.put(key,item);
-    }
+        }
         //Update cart summary
         noOfItems++;
         total += variant.price;
 
-}
+    }
 
     //removing product
     public void remove(Product product) {
