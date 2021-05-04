@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class Cart {
 
     public HashMap<String, CartItem> cartItems = new HashMap<>();
-    float total, noOfItems;
+    public float total, noOfItems;
 
     //adding WBP
     public void add(Product product, float qty) {
@@ -18,7 +18,7 @@ public class Cart {
 
         //Adding for the first time
         else {
-            CartItem item = new CartItem(product.name, product.pricePerKg, qty);
+            CartItem item = new CartItem(product,product.name, product.pricePerKg, qty);
             cartItems.put(product.name, item);
             noOfItems++;
         }
@@ -41,7 +41,7 @@ public class Cart {
 
         //Add for the first time
         else{
-            CartItem item = new CartItem(product.name, variant.price, 1);
+            CartItem item = new CartItem(product,product.name, variant.price, 1);
             cartItems.put(key,item);
         }
         //Update cart summary
@@ -75,7 +75,7 @@ public class Cart {
             if (cartItems.containsKey(key)) {
                 //Update cartSummary
                 total -= cartItems.get(key).cost();
-                noOfItems -= cartItems.get(key).qty;
+                noOfItems -= 1;
 
                 cartItems.remove(key);
             }
@@ -102,8 +102,14 @@ public class Cart {
 
     @Override
     public String toString() {
-        return cartItems.values()
-                +String.format("\n total %f items (Rs. %f)",noOfItems,total);
-
+        StringBuilder stringBuilder=new StringBuilder();
+        int count=1;
+        for (CartItem cartItem:cartItems.values()){
+            stringBuilder.append("\n").append(count).append(")").append(cartItem);
+            count++;
+        }
+        return "MyCart :-" +
+                "  "+ stringBuilder +
+                String.format("\ntotal %.0f items (Rs. %.2f)", noOfItems, total);
     }
 }

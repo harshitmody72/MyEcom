@@ -4,12 +4,13 @@ public class CartItem {
 
     String name;
     float unitPrice , qty;
+    public Product product;
 
-    public CartItem(String name, float unitPrice, float qty) {
-
+    public CartItem(Product product, String name, float qty, float unitPrice) {
+        this.product = product;
         this.name = name;
-        this.unitPrice = unitPrice;
         this.qty = qty;
+        this.unitPrice = unitPrice;
     }
 
     float cost(){
